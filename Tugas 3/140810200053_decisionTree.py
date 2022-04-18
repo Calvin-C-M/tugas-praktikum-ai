@@ -81,17 +81,22 @@ def main() :
     attributeNames=file1.readline().strip("\n").split(",")
     dataset1=getData(file1)
 
-    decision=processDecision(dataset1.decision)
+    # gains=dict.fromkeys(attributeNames,0)
+    gains=[]
 
     outlook=processAttribute(dataset1.outlook,dataset1.decision)
+    temp=processAttribute(dataset1.temp,dataset1.decision)
+    humid=processAttribute(dataset1.humid,dataset1.decision)
+    wind=processAttribute(dataset1.wind,dataset1.decision)
+    decision=processDecision(dataset1.decision)
 
-    # print(outlook)
+    gains.append(gain(decision,outlook))
+    gains.append(gain(decision,temp))
+    gains.append(gain(decision,humid))
+    gains.append(gain(decision,wind))
 
-    # Testing gain algorithm
-    # test=gain([6,4],[[1,4],[5,0]])
-    test=gain(decision,outlook)
+    print(np.amax(gains))
 
-    print(test)
     return 0
 
 main()
